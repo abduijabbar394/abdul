@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অডিও থেকে টেক্সট কনভার্টার</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fa-solid fa-microphone-lines"></i> অডিও থেকে লেখা</h1>
+            <p>যেকোনো অডিও ফাইল সহজেই টেক্সটে রূপান্তর করুন</p>
+        </header>
+
+        <main class="app-card">
+            <!-- Upload Area -->
+            <div class="upload-section" id="drop-area">
+                <input type="file" id="file-input" accept="audio/mp3, audio/wav, audio/m4a, audio/aac, audio/ogg" hidden>
+                <div class="upload-content">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <h3>এখানে টেনে এনে ছাড়ুন</h3>
+                    <p>অথবা</p>
+                    <button class="btn browse-btn" onclick="document.getElementById('file-input').click()">
+                        অডিও ফাইল নির্বাচন করুন
+                    </button>
+                    <p class="file-hint">সাপোর্টেড ফরম্যাট: mp3, wav, m4a, aac, ogg</p>
+                </div>
+            </div>
+
+            <!-- Selected File Info (Hidden by default) -->
+            <div class="file-info hidden" id="file-info">
+                <i class="fa-solid fa-file-audio text-primary"></i>
+                <span id="file-name">filename.mp3</span>
+                <span class="remove-file" onclick="removeFile()" title="ফাইল মুছুন"><i class="fa-solid fa-xmark"></i></span>
+            </div>
+
+            <!-- Error Message (Hidden by default) -->
+            <div class="error-message hidden" id="error-message"></div>
+
+            <!-- Convert Button -->
+            <button class="btn primary-btn disabled" id="convert-btn" onclick="convertAudio()">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> টেক্সটে রূপান্তর করুন
+            </button>
+
+            <!-- Loading State (Hidden by default) -->
+            <div class="loading-state hidden" id="loading-state">
+                <div class="loader"></div>
+                <p>প্রক্রিয়াধীন... দয়া করে অপেক্ষা করুন</p>
+            </div>
+
+            <!-- Result Area (Hidden by default) -->
+            <div class="result-area hidden" id="result-area">
+                <div class="result-header">
+                    <h3>ফলাফল</h3>
+                    <div class="result-actions">
+                        <button class="btn-icon" onclick="copyText()" title="কপি করুন">
+                            <i class="fa-regular fa-copy"></i> কপি করুন
+                        </button>
+                        <button class="btn-icon" onclick="downloadText()" title="ডাউনলোড করুন">
+                            <i class="fa-solid fa-download"></i> ডাউনলোড
+                        </button>
+                    </div>
+                </div>
+                <div class="result-content" id="result-text" contenteditable="true">
+                    এখানে আপনার টেক্সট দেখাবে...
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">কপি করা হয়েছে!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
